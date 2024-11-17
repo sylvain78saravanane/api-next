@@ -1,0 +1,25 @@
+#     version: '3.8'
+#     
+#     services:
+#       mysql:
+#         image: mysql:8.0
+#         container_name: mysql-container
+#         environment:
+#           MYSQL_ROOT_PASSWORD: rootpassword   # Mot de passe de l'utilisateur root
+#           MYSQL_DATABASE: next_user          # Nom de la base de données
+#           MYSQL_USER: my_user                # Nom d'utilisateur pour la connexion
+#           MYSQL_PASSWORD: my_password        # Mot de passe pour l'utilisateur
+#         ports:
+#           - "3306:3306"  # Le port exposé pour la connexion MySQL
+#         volumes:
+#           - mysql-data:/var/lib/mysql   # Persistance des données
+#         networks:
+#           - mysql-network
+#     
+#     volumes:
+#       mysql-data:
+#     
+#     networks:
+#       mysql-network:
+#         driver: bridge
+

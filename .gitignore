@@ -1,4 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# permet de garder les données sensibles en sécurité
 
 # dependencies
 /node_modules
