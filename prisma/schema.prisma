@@ -8,7 +8,7 @@ generator client {
 }
 
 model User {
-  id      String @id @default(uuid()) @db.Uuid
+  id      String @id @default(uuid()) @db.Char(36)
   nom     String
   prenom  String
   email   String @unique

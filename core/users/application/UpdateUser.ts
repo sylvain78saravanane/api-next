@@ -1,4 +1,3 @@
-import { v4 as uuid } from "uuid";
 import { User } from "../domain/entities/User";
 import { UserRepository } from "../domain/repositories/UserRepository";
 

@@ -7,26 +7,48 @@ import { NextResponse } from "next/server";
 
 const repository = new PrismaUserRepository();
 
-export async function POST (request : Request) {
-    const { nom, prenom, email, age } = await request.json();
-    const createUser = new CreateUser(repository);
-    const user = await createUser.execute(nom, prenom, email, Number(age));
-    return NextResponse.json(user, { status: 201 });
+export async function POST(request: Request) {
+    try {
+        const { nom, prenom, email, age } = await request.json();
+        const createUser = new CreateUser(repository);
+        const user = await createUser.execute(nom, prenom, email, Number(age));
+        return NextResponse.json(user, { status: 201 });
+    } catch (error: any) {
+        console.error("Error in POST : ", error.message);
+        return NextResponse.json (
+            {error : "Une erreur est survenue lors de la crétion de l'utilisateur" },
+            {status : 500}
+        );
+    }
 }
 
-export async function GET(request : Request) {
-    const { searchParams } = new URL(request.url);
+export async function GET(request: Request) {
+  try {
+    const {searchParams} = new URL (request.url);
     const id = searchParams.get("id");
 
     const findByUser = new FindByUser(repository);
     const user = await findByUser.execute(id || "");
-    if (!user) return NextResponse.json({ error: "Utilisateur non trouvé" }, { status: 404 });
+    if (!user) {
+        return NextResponse.json(
+            { error: "Utilisateur non trouvé" },
+            { status: 404 }
+        );
+    }
 
     return NextResponse.json(user, { status: 200 });
     
+  } catch (error : any) {
+    console.error("Error in GET /users:", error.message);
+    return NextResponse.json(
+        { error: "Une erreur est survenue lors de la récupération de l'utilisateur." },
+        { status: 500 }
+    );
+  }
+
 }
 
-export async function PUT (request : Request) {
+export async function PUT(request: Request) {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
 
@@ -37,7 +59,7 @@ export async function PUT (request : Request) {
     return NextResponse.json({ message: "Utilisateur mis à jour avec succès" }, { status: 200 });
 }
 
-export async function DELETE (request : Request) {
+export async function DELETE(request: Request) {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
 

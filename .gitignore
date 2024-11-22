@@ -41,4 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 #docker
-docker.compose.yml
+docker-compose.yml
+
+#fichier_perso
+fichier_note.txt
